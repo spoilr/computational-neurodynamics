@@ -1,7 +1,6 @@
-function Connect
+function [layer] = Connect()
 
-% Layer{X}.S{Y} corresponds to the matrix of connexions from layer Y to layer X
-% S(X,Y) is the connexion from neuron X to neuron Y
+% Layer{X}.S{Y} corresponds to the matrix of connections from layer Y to layer X
 
     %load of the Constants
     globalVariable(); 
@@ -37,5 +36,4 @@ function Connect
     layer{INH}.delay{INH} = ones(INHIBITORY_NEURONS, INHIBITORY_NEURONS);
     layer{INH}.delay{EXC} = ones(INHIBITORY_NEURONS, EXC_ROWS);
     
-    save('Network.mat','layer');
 end

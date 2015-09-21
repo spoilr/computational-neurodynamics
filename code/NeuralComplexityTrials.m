@@ -4,10 +4,12 @@ function NeuralComplexityTrials(trialsNum, Tmax, plotResult)
     complexities = zeros(1, trialsNum);
     
     for i = 1:trialsNum
-        p = rand() / 2;
+        % probability between 0.1 and 0.5
+        p = (0.4) * rand() + 0.1;
         
         ps(i) = p;
-        
+        Connect();
+
         means = PerformSimulation(p, Tmax, 1001, false);
         
         complexity = NeuralComplexity(means);
@@ -26,11 +28,4 @@ function NeuralComplexityTrials(trialsNum, Tmax, plotResult)
        plotComplex(); 
     end
     
-end
-
-function plotComplex
-    load('struct.mat','S');
-    plot(S.complex, S.ps, 'o', 'MarkerFaceColor', 'b')
-    xlabel('Rewiring probability p');
-    ylabel('Neural Complexity');
 end

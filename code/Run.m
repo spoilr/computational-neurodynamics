@@ -1,11 +1,9 @@
-function Run(Tmax, plotResults, p)
+function Run(Tmax, plotResults, p, layer)
 
 % Simulates two layers (imported from saved file) of Izhikevich neurons
 
     globalVariable(); 
-
-    load('Network.mat','layer');
-
+    
     N1 = layer{1}.rows;
     M1 = layer{1}.columns;
 
@@ -37,26 +35,11 @@ function Run(Tmax, plotResults, p)
        for lr=1:length(layer)
           layer = IzNeuronUpdate(layer,lr,t,Dmax);
        end
-
-       v1(t,1:N1*M1) = layer{1}.v;
-       v2(t,1:N2*M2) = layer{2}.v;
-
-       u1(t,1:N1*M1) = layer{1}.u;
-       u2(t,1:N2*M2) = layer{2}.u;
-
     end
 
 
     firings1 = layer{1}.firings;
     firings2 = layer{2}.firings;
-
-    % Add Dirac pulses (mainly for presentation)
-    if ~isempty(firings1)
-       v1(sub2ind(size(v1),firings1(:,1),firings1(:,2))) = 30;
-    end
-    if ~isempty(firings2)
-       v2(sub2ind(size(v2),firings2(:,1),firings2(:,2))) = 30;
-    end
 
     save('Network.mat','layer');
 
